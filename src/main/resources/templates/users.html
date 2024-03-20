@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>users</title>
+</head>
+<style>
+    table {
+        border-spacing: 0 10px;
+        font:  bold 100% Georgia, serif;
+        margin: 40px auto;
+        text-shadow: 5px 5px 5px #3F3F7F;
+        background: #B1B9D9;
+        text-align: center;
+        vertical-align: middle;
+        width: 50%;
+        border: 10px solid blue;
+    }
+    input {
+        color: blueviolet;
+        background: aliceblue;
+        font:  bold 100% Georgia, serif;
+        text-shadow: 5px 5px 5px #3F3F7F;
+    }
+</style>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getId()}"></td>
+        <td th:utext="${user.getFirstName()}"></td>
+        <td th:utext="${user.getLastName()}"></td>
+        <td th:utext="${user.getEmail()}"></td>
+        <td><form th:method="GET" th:action="@{/users/{id}/update(id=${user.getId()})}">
+            <input type="submit" value="Edit"/>
+        </form></td>
+        <td  > <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+            <input type="submit" value="Delete"/>
+        </form></td>
+    </tr>
+    </tbody>
+</table>
+<center>
+    <form th:method="GET" th:action="@{/users/new}">
+        <input type="submit" value="Add new User"/>
+    </form></center>
+
+</html>
